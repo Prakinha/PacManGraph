@@ -17,6 +17,7 @@ class Graph<T> {
             map.get(destination).add(source);
         }
     }
+    
 
     public void countVertices() {
         System.out.println("Número de vértices: " + map.keySet().size());
