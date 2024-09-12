@@ -62,16 +62,15 @@ class Graph<T> {
         return builder.toString();
     }
 
-    // Método BFS implementado corretamente
     public void BFS(T source, T target) {
         if (!map.containsKey(source) || !map.containsKey(target)) {
             System.out.println("Vértice de origem ou destino não existe.");
             return;
         }
 
-        Set<T> visited = new HashSet<>(); // Para acompanhar os visitados
-        Queue<T> queue = new LinkedList<>(); // Fila para BFS
-        Map<T, T> parent = new HashMap<>(); // Para reconstruir o caminho
+        Set<T> visited = new HashSet<>();
+        Queue<T> queue = new LinkedList<>();
+        Map<T, T> parent = new HashMap<>();
 
         visited.add(source);
         queue.add(source);
@@ -89,7 +88,7 @@ class Graph<T> {
                 if (!visited.contains(neighbor)) {
                     visited.add(neighbor);
                     queue.add(neighbor);
-                    parent.put(neighbor, current); // Guarda o pai do vizinho
+                    parent.put(neighbor, current);
                 }
             }
         }
@@ -97,7 +96,6 @@ class Graph<T> {
         System.out.println("Alvo não encontrado no grafo.");
     }
 
-    // Método auxiliar para reconstruir o caminho do alvo até a origem
     private List<T> reconstructPath(Map<T, T> parent, T target) {
         List<T> path = new LinkedList<>();
         for (T at = target; at != null; at = parent.get(at)) {
@@ -138,7 +136,6 @@ public class GrafoPacMan {
         scanner.close();
     }
 
-    // Método para criar o grafo
     @SuppressWarnings("rawtypes")
     public static Graph criarGrafoPacMan() {
         Graph<Integer> graph = new Graph<>();
