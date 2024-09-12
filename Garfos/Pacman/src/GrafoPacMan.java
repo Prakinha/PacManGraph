@@ -17,7 +17,6 @@ class Graph<T> {
             map.get(destination).add(source);
         }
     }
-    
 
     public void countVertices() {
         System.out.println("Número de vértices: " + map.keySet().size());
@@ -110,10 +109,39 @@ class Graph<T> {
 }
 
 public class GrafoPacMan {
-    @SuppressWarnings("unchecked")
-    public static void main(String args[]) {
-        @SuppressWarnings("rawtypes")
-        Graph graph = new Graph();
+    public static void main(String[] args) {
+        Graph<Integer> graph = criarGrafoPacMan();
+
+        System.out.println("Lista de Adjacência:\n" + graph.toString());
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Digite a posição do fantasma VERMELHO: ");
+            String redGhost = scanner.nextLine();
+            System.out.print("Digite a posição do player: ");
+            String player = scanner.nextLine();
+
+            if (redGhost.isEmpty() || player.isEmpty()) {
+                System.out.println("Stoping");
+                break;
+            }
+
+            try {
+                System.out.println("executnado BFS de " + redGhost + " para " + player + ":");
+                graph.BFS(Integer.parseInt(redGhost), Integer.parseInt(player));
+            } catch (NumberFormatException e) {
+                System.out.println("digite um número válido!");
+            }
+        }
+
+        scanner.close();
+    }
+
+    // Método para criar o grafo
+    @SuppressWarnings("rawtypes")
+    public static Graph criarGrafoPacMan() {
+        Graph<Integer> graph = new Graph<>();
         graph.addNewEdge(1, 2, true);
         graph.addNewEdge(1, 9, true);
         graph.addNewEdge(2, 3, true);
@@ -177,14 +205,7 @@ public class GrafoPacMan {
         graph.addNewEdge(53, 54, true);
         graph.addNewEdge(54, 55, true);
         graph.addNewEdge(55, 56, true);
-        
 
-        System.out.println("Lista de Adjacência:\n" + graph.toString());
-
-        System.out.println("Executando BFS:");
-        for (int i = 1; i <= 56; i++) {
-            graph.BFS(i, 16);
-        }
-        // graph.BFS(5, 16); // Exemplo de BFS de 1 até 16
+        return graph;
     }
 }
